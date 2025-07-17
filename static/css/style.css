@@ -3180,3 +3180,157 @@ ol {
   object-fit: cover;
   display: block;
 }
+*/ .footer {
+  margin-top: 0 !important;
+}
+
+/* 2. Add space below your main content sections.
+     This ensures there is a clean gap before the footer begins.
+     You can adjust the '100px' value if you want more or less space.
+*/
+.videos.spad,
+.about.spad,
+.event.spad {
+  padding-bottom: 100px;
+}
+.contact.section {
+  background-color: #f8f9fa;
+  /* Light grey background for the whole section */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* --- Left Blue Box (Contact Info) --- */
+.info-box {
+  background-color: #0d6efd;
+  /* Bootstrap's primary blue */
+  color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  height: 100%;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h3 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.info-box p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.info-box .info-item {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.info-box .icon-box {
+  background-color: rgba(255, 255, 255, 0.15);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+  /* Prevents the icon box from shrinking */
+}
+
+.info-box .icon-box i {
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.info-box .content h4 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.info-box .content p {
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* --- Right White Box (Contact Form) --- */
+.contact-form {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  height: 100%;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h3 {
+  font-weight: 700;
+  color: #333;
+}
+
+.contact-form .form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 12px 15px;
+}
+
+.contact-form .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.contact-form .btn {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 50px;
+  /* Pill shape */
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form .btn:hover {
+  background-color: #0b5ed7;
+}
+
+.php-email-form .loading {
+  display: none;
+}
+
+.php-email-form .error-message {
+  display: none;
+}
+
+.php-email-form .sent-message {
+  display: none;
+}
+
+#scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+  font-size: 24px;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+
+#scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#scroll-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}

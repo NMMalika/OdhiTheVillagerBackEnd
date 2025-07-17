@@ -1,10 +1,12 @@
+{% load static %}
 <!-- Header Section Begin -->
-<header class="header">
+<!-- Header Section Begin -->
+<header class="header header--normal">
     <div class="container">
         <div class="row">
             <div class="col-lg-2 col-md-2">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-10 col-md-10">
@@ -14,7 +16,6 @@
                             <li class="active"><a href="{% url 'index' %}">Home</a></li>
                             <li><a href="{% url 'about' %}">About</a></li>
                             <li><a href="https://odhithevillager.hustlesasa.shop/" target="_blank" rel="noopener noreferrer">Discography</a></li>
-
                             <li><a href="{% url 'video' %}">Videos</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
