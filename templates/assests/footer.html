@@ -8,12 +8,12 @@
                         <li>
                             <i class="fa fa-phone"></i>
                             <p>Phone</p>
-                            <h6>+254</h6>
+                            <h6>{{ general_info.phone }}</h6>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i>
                             <p>Email</p>
-                            <h6>odhithevillager@gmail.com</h6>
+                            <h6>{{ general_info.email }}</h6>
                         </li>
                     </ul>
                 </div>
@@ -22,10 +22,10 @@
                 <div class="footer__social">
                     <h2>odhithevillager</h2>
                     <div class="footer__social__links">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="{{ general_info.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="" target="_blank"><i class="fa fa-instagram"></i></a>
+                        <a href="{{ general_info.youtube }}" target="_blank"><i class="fa fa-youtube"></i></a>
                     </div>
                 </div>
             </div>

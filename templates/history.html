@@ -1,0 +1,13 @@
+<h2>History of {{ object.name }}</h2>
+<ul>
+    {% for record in history_list %}
+    <li>
+        {{ record.history_date|date:"Y-m-d H:i" }} |
+        {{ record.get_history_type_display }} |
+        {% if record.history_user %} By {{ record.history_user }} {% endif %}
+        |
+        <a href="{% url 'revert_generalinfo' object.pk record.id %}">Revert</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'index' %}">Back</a>

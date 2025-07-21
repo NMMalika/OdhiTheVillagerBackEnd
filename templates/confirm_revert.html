@@ -1,0 +1,9 @@
+<h3>Revert Confirmation</h3>
+<p>Are you sure you want to revert <strong>{{ object.name }}</strong> to the version saved on <strong>{{
+        historical.history_date }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Revert</button>
+    <a href="{% url 'generalinfo_history' object.pk %}">Cancel</a>
+</form>

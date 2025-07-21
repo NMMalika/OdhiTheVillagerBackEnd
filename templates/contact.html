@@ -121,8 +121,8 @@ contact form, business contact, email, phone number, address, FAQs{% endblock %}
                         </div>
                         <div class="content">
                             <h4>Our Location</h4>
-                            <p>A108 Adam Street</p>
-                            <p>New York, NY 535022</p>
+                            <p>{{ general_info.location }}</p>
+
                         </div>
                     </div>
 
@@ -132,8 +132,7 @@ contact form, business contact, email, phone number, address, FAQs{% endblock %}
                         </div>
                         <div class="content">
                             <h4>Phone Number</h4>
-                            <p>+1 5589 55488 55</p>
-                            <p>+1 6678 254445 41</p>
+                            <p>{{ general_info.phone }}</p>
                         </div>
                     </div>
 
@@ -143,8 +142,7 @@ contact form, business contact, email, phone number, address, FAQs{% endblock %}
                         </div>
                         <div class="content">
                             <h4>Email Address</h4>
-                            <p>info@example.com</p>
-                            <p>contact@example.com</p>
+                            <p>{{ general_info.email }}</p>
                         </div>
                     </div>
                 </div>
