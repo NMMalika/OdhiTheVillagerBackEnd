@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Generalinfo
+from .models import Generalinfo,Hero, OtherVideo
 from django.contrib import messages
 
 def index(request):
-    return render(request, "index.html", {"message": "Hello, world. You're at the OdhiTheVillager index."})
+    hero = Hero.objects.first()  # Get the first hero object
+    videos = OtherVideo.objects.all()
+    return render(request, "index.html", {'hero': hero, 'videos': videos})
 def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})
 def contact(request):

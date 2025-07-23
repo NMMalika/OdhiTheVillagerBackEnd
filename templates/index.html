@@ -8,15 +8,15 @@
 
 {% block content %}
     <!-- Hero Section Begin -->
-    <section class="hero spad set-bg" data-setbg="{% static 'img/mylove.jpg' %}">
+    <section class="hero spad set-bg" data-setbg="{{ hero.image.url }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="hero__text">
                         <span>New single</span>
-                        <h1>My Love</h1>
-                        <p>A heartfelt conversation with My Love, a companion for over four decades, this song remains true to its origins, composed shortly after our meeting. <br>Despite the passage of time, the lyrics retain their honesty, reflecting the enduring bond we share.<br> Together, we've weathered life's highs and lows, grateful for each moment.</p>
-                       <a data-fancybox href="https://www.youtube.com/watch?v=mf24_dUoxac" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                        <h1>{{ hero.title }}</h1>
+                        <p>{{ hero.description }}</p>
+                       <a data-fancybox href="{{ hero.youtube_link }}" class="play-btn video-popup"><i class="fa fa-play"></i></a>
                 </div>
             </div>
         </div>
@@ -26,64 +26,35 @@
     </section>
     <!-- Hero Section End -->
 
-    <!-- Event Section Begin -->
-    <section class="event spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>OTHER VIDEOS</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="col-xl-3 col-lg-3 col-md-6">
-                    <div class="single_video">
-                        <div class="video-wrapper">
-                          <iframe width="100%" height="200" src="https://www.youtube.com/embed/mf24_dUoxac" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-caption">
-                          <span>WADAGI- 2018</span>
-                          <h3>My Love</h3>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6">
-                    <div class="single_video">
-                        <div class="video-wrapper">
-                          <iframe width="100%" height="200" src="https://www.youtube.com/embed/aj9mTzknbRk" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-caption">
-                          <span>Wadagi- 2018</span>
-                          <h3>Mwolo</h3>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6">
-                    <div class="single_video">
-                        <div class="video-wrapper">
-                          <iframe width="100%" height="200" src="https://www.youtube.com/embed/JjgfEkXezTg" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-caption">
-                          <span>ODHI The village - 2018</span>
-                          <h3>ISANDA</h3>
-                        </div>
-                      </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6">
-                     <div class="single_video">
-                        <div class="video-wrapper">
-                          <iframe width="100%" height="200" src="https://www.youtube.com/embed/h1wPLaiO-7Y" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-caption">
-                          <span>Odhi The Village - 2018</span>
-                          <h3>Pikipikina</h3>
-                        </div>
-                      </div>
+    <!-- Other Videos Section Begin -->
+        <section class="event spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>OTHER VIDEOS</h2>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" width="100%" height="200" src="https://www.youtube.com/embed/{{ video.video_id }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-caption text-center mt-2">
+                    <span>{{ video.artist|title }} - {{ video.year }}</span><br>
+                    <h5>{{ video.title }}</h5>
+                    <p>{{ video.caption }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
     <!-- Event Section End -->
 
     <!-- About Section Begin -->
