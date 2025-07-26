@@ -100,3 +100,22 @@ class LatestTrack(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.artist}"
+class Album(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    cover_image = models.ImageField(upload_to='album_covers/')
+    SoundCloud = models.URLField(max_length=200, help_text="Link to the album on SoundCloud")
+    spotify_link = models.URLField(max_length=200, blank=True, null=True, help_text="Link to the album on Spotify")
+    apple_music_link = models.URLField(max_length=200, blank=True, null=True, help_text="Link to the album on Apple Music")
+    boomplay_link = models.URLField(max_length=200, blank=True, null=True, help_text="Link to the album on Boomplay")
+    hustlesasa_link = models.URLField(max_length=200, blank=True,null=True, help_text="Link to the album on HustleSasa")
+    youtube_link = models.URLField(max_length=200, blank=True, null=True, help_text="Link to the album on YouTube")
+    release_date = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-release_date']  # Show the newest albums first
+        verbose_name = "Album"
+        verbose_name_plural = "Albums"
+
+    def __str__(self):
+        return self.title
