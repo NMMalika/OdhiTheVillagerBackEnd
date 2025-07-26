@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Generalinfo, Hero, OtherVideo
+from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -33,3 +33,16 @@ class OtherVideoAdmin(admin.ModelAdmin):
     search_fields = ('title', 'caption')
 
 admin.site.register(OtherVideo, OtherVideoAdmin)
+
+
+class EventTypeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'icon')
+    search_fields = ('title',)
+
+admin.site.register(EventType, EventTypeAdmin)
+
+class EventMusicAdmin(admin.ModelAdmin):
+    list_display = ('title', 'artist')
+    search_fields = ('title', 'artist')
+
+admin.site.register(EventMusic, EventMusicAdmin)

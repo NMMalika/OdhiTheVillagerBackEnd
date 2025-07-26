@@ -86,48 +86,37 @@
         </div>
     </section>
     <!-- About Section End -->
+  
 
     <!-- Services Section Begin -->
     <section class="services">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 p-0">
-                    <div class="services__left set-bg" data-setbg="{% static 'img/services/serviceodhi.jpg' %}">
-                        <a href="https://www.youtube.com/watch?v=JGwWNGJdvx8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                    </div>
+                   <div class="services__left set-bg" data-setbg="{{ eventmusics.cover_image.url }}">
+                   <audio controls>
+                      <source src="{{ eventmusics.audio_file.url }}" type="audio/mpeg">
+                                    Your browser does not support the audio tag.
+                    </audio>
+                   
+                     </div>
                 </div>
                 <div class="col-lg-6 p-0">
-                    <div class="row services__list">
-                        <div class="col-lg-6 p-0 order-lg-1 col-md-6 order-md-1">
-                            <div class="service__item deep-bg">
-                                <img src="{% static 'img/services/service-1.png' %}" alt="">
-                                <h4>Wedding</h4>
-                                <p>Bring unforgettable rhythm and soul to your special day with live Benga performances that connect hearts and cultures. Let love dance to the beat of tradition and joy..</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 p-0 order-lg-2 col-md-6 order-md-2">
-                            <div class="service__item">
-                                <img src="{% static 'img/services/service-2.png' %}" alt="">
-                                <h4>Clubs and bar</h4>
-                                <p>Turn any night into a cultural celebration! Our Benga sets ignite the dancefloor with live beats, vocals, and electric vibes that keep your crowd moving all night.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 p-0 order-lg-4 col-md-6 order-md-4">
-                            <div class="service__item deep-bg">
-                                <img src="{% static 'img/services/service-4.png' %}" alt="">
-                                <h4>Live Events</h4>
-                                <p>Whether it’s a festival, community gathering, or special event, Odhi The Villager brings Benga music to life with powerful performances rooted in tradition and passion.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 p-0 order-lg-3 col-md-6 order-md-3">
-                            <div class="service__item">
-                                <img src="{% static 'img/services/service-3.png' %}" alt="">
-                                <h4>Corporate events</h4>
-                                <p>Add authentic Kenyan flavor to your company events with engaging, energetic Benga music that inspires, uplifts, and entertains teams and guests alike.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row services__list">
+        {% for eventtype in eventtypes %}
+        <div class="col-lg-6 p-0 order-lg-{{ forloop.counter }} col-md-6 order-md-{{ forloop.counter }}">
+            <div class="service__item {% if forloop.counter|divisibleby:2 %}deep-bg{% endif %}">
+               
+                <i class="{{ eventtype.icon }}" style="font-size: 2.5rem;"></i>
+
+                <h4>{{ eventtype.title }}</h4>
+                <p>{{ eventtype.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
             </div>
         </div>
     </section>

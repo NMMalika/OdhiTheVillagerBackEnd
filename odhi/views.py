@@ -1,13 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Generalinfo,Hero, OtherVideo
+from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo
 from django.contrib import messages
 
 def index(request):
     hero = Hero.objects.first()  # Get the first hero object
     videos = OtherVideo.objects.all()
-    return render(request, "index.html", {'hero': hero, 'videos': videos})
+    eventtypes = EventType.objects.all()
+    eventmusics = EventMusic.objects.first()
+
+    return render(request, "index.html", {
+        'hero': hero,
+        'videos': videos,
+        'eventtypes': eventtypes,
+        'eventmusics': eventmusics
+    })
 def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})
 def contact(request):
@@ -18,7 +26,9 @@ def blog(request):
 def blogdetail(request):
     return render(request, "blogdetail.html", {"message": "This is the blog detail page of OdhiTheVillager."})
 def video(request):
-    return render(request,"video.html",{"message":"Hello,watch this awesome videos"})
+    hero = Hero.objects.first()
+    videos = OtherVideo.objects.all()
+    return render(request,"video.html",{'hero': hero, 'videos': videos})
 
 # Create your views here.
 def generalinfo_history(request, pk):

@@ -55,3 +55,48 @@ class OtherVideo(models.Model):
     class Meta:
         verbose_name = "Other Video"
         verbose_name_plural = "Other Videos"
+        
+class EventType(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    icon = models.CharField(max_length=100)  # Store icon class name (e.g. bi-heart)
+    history = HistoricalRecords()
+    
+    
+    
+
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = "Event Type"
+        verbose_name_plural = "Event Types"
+
+class EventMusic(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.CharField(max_length=100)
+    audio_file = models.FileField(upload_to='music/')  # for MP3s
+    # Optional: link = models.URLField(blank=True, null=True)  # if from YouTube
+    cover_image = models.ImageField(upload_to='covers/', blank=True)
+    preview_duration = models.IntegerField(default=60)  # in seconds
+
+    def __str__(self):
+        return f"{self.title} - {self.artist}"
+    class Meta:
+        verbose_name = "Event Music"
+        verbose_name_plural = "Event Music"
+
+class LatestTrack(models.Model):
+    title = models.CharField(max_length=255)
+    artist = models.CharField(max_length=255, default="Odhi The Villager")
+    cover_image = models.ImageField(upload_to='track_covers/')
+    audio_preview = models.FileField(upload_to='audio_previews/', blank=True, null=True)  # optional
+    buy_link = models.URLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']  # Newest first
+        verbose_name = "Latest Track"
+        verbose_name_plural = "Latest Tracks"
+
+    def __str__(self):
+        return f"{self.title} - {self.artist}"
