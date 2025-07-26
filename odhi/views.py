@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo
+from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack
 from django.contrib import messages
 
 def index(request):
@@ -9,12 +9,14 @@ def index(request):
     videos = OtherVideo.objects.all()
     eventtypes = EventType.objects.all()
     eventmusics = EventMusic.objects.first()
+    latest_tracks = LatestTrack.objects.all()[:6]
 
     return render(request, "index.html", {
         'hero': hero,
         'videos': videos,
         'eventtypes': eventtypes,
-        'eventmusics': eventmusics
+        'eventmusics': eventmusics,
+        'latest_tracks': latest_tracks
     })
 def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})

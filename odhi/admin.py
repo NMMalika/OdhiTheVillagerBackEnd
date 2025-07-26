@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic
+from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -46,3 +46,9 @@ class EventMusicAdmin(admin.ModelAdmin):
     search_fields = ('title', 'artist')
 
 admin.site.register(EventMusic, EventMusicAdmin)
+
+@admin.register(LatestTrack)
+class MusicTrackAdmin(admin.ModelAdmin):
+    list_display = ('title', 'artist', 'created_at')
+    search_fields = ('title',)
+    ordering = ('-created_at',)
