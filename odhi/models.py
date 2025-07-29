@@ -100,6 +100,7 @@ class LatestTrack(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.artist}"
+    
 class Album(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
@@ -119,3 +120,16 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
+    
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+   
+
+    class Meta:
+        
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQs"
+
+    def __str__(self):
+        return self.question

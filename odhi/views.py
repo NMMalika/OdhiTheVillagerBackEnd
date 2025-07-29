@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album
+from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ
 from django.contrib import messages
 
 def index(request):
@@ -24,8 +24,16 @@ def index(request):
     })
 def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})
+
 def contact(request):
-    return render(request, "contact.html", {"message": "This is the contact page of OdhiTheVillager."})
+
+        
+    faqs = FAQ.objects.all()
+    context = {
+        'faqs': faqs,
+        #... other context data
+    }
+    return render(request, "contact.html", context)
 
 def blog(request):
     return render(request, "blog.html", {"message": "Welcome to the OdhiTheVillager blog."})

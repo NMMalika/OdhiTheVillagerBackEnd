@@ -3308,3 +3308,95 @@ ol {
   display: none;
 }
 
+/*--------------------------------------------------------------
+# FAQ Section
+--------------------------------------------------------------*/
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Creates space between FAQ items */
+}
+
+.faq-item {
+  background: #b2b1f1;
+  border: 1px solid #eef0ef;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  /* Important for smooth transitions */
+  transition: all 0.3s ease-in-out;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  /* Ensure the text doesn't overlap the icon */
+  padding-right: 30px;
+}
+
+/* Toggle icon styles */
+.faq-toggle {
+  font-size: 16px;
+  color: #1a0bec;
+  /* Your site's primary color */
+}
+
+.faq-toggle .icon-minus {
+  display: none;
+  /* Hide the minus icon by default */
+}
+
+/* Answer content styles */
+.faq-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding-top 0.3s ease-out;
+}
+
+.faq-content p {
+  margin: 0;
+  padding-top: 15px;
+  color:#000000;
+
+  line-height: 1.6;
+}
+
+
+/* --- Active State --- */
+/* When the faq-item has the 'faq-active' class */
+
+.faq-item.faq-active .faq-question h3 {
+  color: #2d0af0;
+  /* Highlight the question text when active */
+}
+
+.faq-item.faq-active .faq-content {
+  max-height: 300px;
+  /* Set a height large enough for the content */
+  opacity: 1;
+  padding-top: 15px;
+  /* Add space when content is visible */
+}
+
+.faq-item.faq-active .faq-toggle .icon-plus {
+  display: none;
+  /* Hide the plus icon when active */
+}
+
+.faq-item.faq-active .faq-toggle .icon-minus {
+  display: block;
+  /* Show the minus icon when active */
+}
