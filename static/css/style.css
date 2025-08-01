@@ -3400,3 +3400,153 @@ ol {
   display: block;
   /* Show the minus icon when active */
 }
+.album-streaming-links a {
+  display: inline-block;
+  margin: 6px 6px 0 0;
+  text-align: center;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.album-streaming-links a:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Specific platform colors */
+.album-streaming-links a[title*="SoundCloud"] {
+  background: #ff5500;
+}
+
+.album-streaming-links a[title*="Spotify"] {
+  background: #1DB954;
+}
+
+.album-streaming-links a[title*="Apple"] {
+  background: #000000;
+}
+
+.album-streaming-links a[title*="YouTube"] {
+  background: #FF0000;
+}
+
+.album-streaming-links a[title*="Boomplay"] {
+  background: #0056B3;
+}
+
+.album-streaming-links a[title*="HustleSasa"] {
+  background: #8e44ad;
+}
+
+.blog__sidebar__social a {
+  display: inline-block;
+  margin: 0 6px;
+  font-size: 16px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  background: #444;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog__sidebar__social a:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Platform-specific hover colors */
+.blog__sidebar__social a[href*="facebook"]:hover {
+  background-color: #3b5998;
+}
+
+.blog__sidebar__social a[href*="twitter"]:hover {
+  background-color: #1DA1F2;
+}
+
+.blog__sidebar__social a[href*="instagram"]:hover {
+  background-color: #d6249f ;
+}
+
+.blog__sidebar__social a[href*="youtube"]:hover {
+  background-color: #FF0000;
+}
+.blog__details__services__item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blog__details__services__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog__details__services__item__pic img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.blog__details__services__item:hover img {
+  transform: scale(1.05);
+}
+
+.blog__details__services__item__text {
+  padding: 15px;
+  text-align: left;
+}
+
+.blog__details__services__item__text h6 {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.blog__details__services__item__text h6 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog__details__services__item__text h6 a:hover {
+  color: #7c3aed;
+  /* violet */
+}
+
+.blog__details__services__item__text span {
+  font-size: 13px;
+  color: #888;
+}
+.blog__details__services__item {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

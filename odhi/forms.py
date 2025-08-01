@@ -1,7 +1,13 @@
 from django import forms
-from .models import EventMusic
+from .models import Subscriber
 
-class EventMusicForm(forms.ModelForm):
+class SubscriberForm(forms.ModelForm):
     class Meta:
-        model = EventMusic
-        fields = ['title', 'artist', 'audio_file', 'cover_image']
+        model = Subscriber
+        fields = ['email']
+        widgets = {
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'Email',
+                'class': 'form-control',
+            }),
+        }

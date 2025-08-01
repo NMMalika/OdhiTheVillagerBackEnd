@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ
+
+from odhi.forms import SubscriberForm
+from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs
 from django.contrib import messages
 
 def index(request):
@@ -10,7 +12,7 @@ def index(request):
     eventtypes = EventType.objects.all()
     eventmusics = EventMusic.objects.first()
     latest_tracks = LatestTrack.objects.all()[:6]
-    latest_tracks = LatestTrack.objects.all()[:4]
+    
     # Fetch all albums, ordered by the release date (newest first)
     albums = Album.objects.all()
 
@@ -37,8 +39,11 @@ def contact(request):
 
 def blog(request):
     return render(request, "blog.html", {"message": "Welcome to the OdhiTheVillager blog."})
+
 def blogdetail(request):
-    return render(request, "blogdetail.html", {"message": "This is the blog detail page of OdhiTheVillager."})
+    recent_blogs = Blogs.objects.all().order_by('-created_at')[:4]  # Get the 4 most recent blogs
+    return render(request, "blogdetail.html", {'recent_blogs': recent_blogs})
+
 def video(request):
     hero = Hero.objects.first()
     videos = OtherVideo.objects.all()
@@ -64,3 +69,11 @@ def revert_generalinfo(request, pk, history_id):
         return redirect('generalinfo_history', pk=pk)
 
     return render(request, 'confirm_revert.html', {'object': obj, 'historical': historical})
+def subscribe(request):
+    form = SubscriberForm()
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('subscribe_success')  # Optional: make this your homepage or thank you page
+    return render(request, 'footer.html', {'form': form})

@@ -151,9 +151,10 @@
                         <div class="track-info flex-grow-1 px-3">
                             <h4>{{ track.title }}</h4>
                             <p class="track-title">{{ track.artist }}</p>
-                            <button class="jp-play player_button" tabindex="0" data-src="{{ track.audio_preview.url }}">
-                                <i class="fa fa-play-circle"></i>
-                            </button>
+                            <audio controls>
+                                <source src="{{ track.audio_preview.url }}" type="audio/mpeg">
+                                Your browser does not support the audio tag.
+                            </audio>
                         </div>
                     
                         <div class="track-buy">

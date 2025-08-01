@@ -49,7 +49,11 @@ storytelling, Luo culture{% endblock %}
                                     <div class="col-lg-6">
                                         <ul>
 
-                                            <li><a href="https://youtu.be/JjgfEkXezTg">youtube link</a></li>
+                                        <li>
+                                            <a href="https://youtu.be/JjgfEkXezTg" target="_blank" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-youtube-play"></i> Watch on YouTube
+                                            </a>
+                                      </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -171,41 +175,26 @@ storytelling, Luo culture{% endblock %}
                             </div>
                         </div>
                         <div class="row">
+                            {% for blog in recent_blogs %}
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="blog__details__services__item">
                                     <div class="blog__details__services__item__pic">
-                                        <img src="{% static 'img/blog/details/manuD.png' %}" alt="">
+                                        <img src="{{ blog.blog_image.url }}" alt="{{ blog.title }}">
                                     </div>
                                     <div class="blog__details__services__item__text">
-                                        <h6><a href="#">Manu Dibangu, himself, belting out Soir au Village</a></h6>
-                                        <span>Dec 06, 2025</span>
+                                        <h6>
+                                            <a href="">
+                                                {{ blog.title|truncatechars:40 }}
+                                            </a>
+                                        </h6>
+                                        <span>{{ blog.created_at|date:"M d, Y" }}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="blog__details__services__item">
-                                    <div class="blog__details__services__item__pic">
-                                        <img src="{% static 'img/blog/details/sur.png' %}" alt="">
-                                    </div>
-                                    <div class="blog__details__services__item__text">
-                                        <h6><a href="#">(S.U.R. = As You Are)</a></h6>
-                                        <span>Dec 06, 2025</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="blog__details__services__item">
-                                    <div class="blog__details__services__item__pic">
-                                        <img src="{% static 'img/blog/details/jawarnitie.png' %}" alt="">
-                                    </div>
-                                    <div class="blog__details__services__item__text">
-                                        <h6><a href="#">JAWAR NITIE (THE SAVIOUR IS REAL)</a></h6>
-                                        <span>March 06, 2025</span>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
+
                     <div class="blog__details__form">
                         <div class="blog__details__form__title">
                             <h4>Leave a comment</h4>
@@ -240,54 +229,34 @@ storytelling, Luo culture{% endblock %}
                             <h4>Social media</h4>
                         </div>
                         <div class="blog__sidebar__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="{{ general_info.facebook }}"><i class="fa fa-facebook"></i></a>
+                            <a href="{{ general_info.twitter }}"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ general_info.instagram }}"><i class="fa fa-instagram"></i></a>
+                            <a href="{{ general_info.youtube }}"><i class="fa fa-youtube"></i></a>
                         </div>
                     </div>
                     <div class="blog__sidebar__item">
                         <div class="blog__sidebar__title">
-                            <h4>Recent posts</h4>
+                            <h4>Recent Posts</h4>
                         </div>
-                        <a href="#" class="recent__item">
+                    
+                        {% for blog in recent_blogs %}
+                        <a href="" class="recent__item">
                             <div class="recent__item__pic">
-                                <img src="{% static 'img/blog/sign.png' %}" alt="">
+                                {% if blog.blog_image %}
+                                <img src="{{ blog.blog_image.url }}" alt="{{ blog.title }}">
+                                {% else %}
+                                <img src="{% static 'img/blog/default.png' %}" alt="No Image">
+                                {% endif %}
                             </div>
                             <div class="recent__item__text">
-                                <h6>Moi made me "The Villager"!</h6>
-                                <span>Dec 17, 2019</span>
+                                <h6>{{ blog.title|truncatewords:10 }}</h6>
+                                <span>{{ blog.created_at|date:"M d, Y" }}</span>
                             </div>
                         </a>
-                        <a href="#" class="recent__item">
-                            <div class="recent__item__pic">
-                                <img src="{% static 'img/blog/ogola.png' %}" alt="">
-                            </div>
-                            <div class="recent__item__text">
-                                <h6>Best leaders interact with those they lead, and allow their intelligence to show.
-                                </h6>
-                                <span>Dec 17, 2019</span>
-                            </div>
-                        </a>
-                        <a href="#" class="recent__item">
-                            <div class="recent__item__pic">
-                                <img src="{% static 'img/blog/expensive.png' %}" alt="">
-                            </div>
-                            <div class="recent__item__text">
-                                <h6>I play expensive music</h6>
-                                <span>Dec 17, 2019</span>
-                            </div>
-                        </a>
-                        <a href="#" class="recent__item">
-                            <div class="recent__item__pic">
-                                <img src="{% static 'img/blog/berling.png' %}" alt="">
-                            </div>
-                            <div class="recent__item__text">
-                                <h6>BERLIN CONFERENCE:The Whys, Hows, Aftermath & Future!</h6>
-                                <span>Dec 17, 2019</span>
-                            </div>
-                        </a>
+                        {% endfor %}
                     </div>
+
                 </div>
             </div>
         </div>
