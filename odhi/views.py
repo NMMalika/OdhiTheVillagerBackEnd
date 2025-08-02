@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
-from odhi.forms import SubscriberForm
 from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs
 from django.contrib import messages
+
+
 
 def index(request):
     hero = Hero.objects.first()  # Get the first hero object
@@ -47,9 +48,16 @@ def blog(request):
 def blogdetail(request, blog_id):
     blog = Blogs.objects.get(id=blog_id)
     recent_blogs = Blogs.objects.all().exclude(id=blog_id).order_by('-created_at')[:4]  # Get the 4 most recent blogs
+      # Previous post: blog with ID less than current (older)
+    previous_blog = Blogs.objects.filter(id__lt=blog_id).order_by('-id').first()
+
+    # Next post: blog with ID greater than current (newer)
+    next_blog = Blogs.objects.filter(id__gt=blog_id).order_by('id').first()
     return render(request, "blogdetail.html", {
         'blog': blog,
-        'recent_blogs': recent_blogs
+        'recent_blogs': recent_blogs,
+        'previous_blog': previous_blog,
+        'next_blog': next_blog
     })
 
 
@@ -78,11 +86,3 @@ def revert_generalinfo(request, pk, history_id):
         return redirect('generalinfo_history', pk=pk)
 
     return render(request, 'confirm_revert.html', {'object': obj, 'historical': historical})
-def subscribe(request):
-    form = SubscriberForm()
-    if request.method == 'POST':
-        form = SubscriberForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('subscribe_success')  # Optional: make this your homepage or thank you page
-    return render(request, 'footer.html', {'form': form})

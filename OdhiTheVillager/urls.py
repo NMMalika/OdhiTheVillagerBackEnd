@@ -30,6 +30,7 @@ urlpatterns = [
     path("video/",views.video,name="video"),
     path('generalinfo/<int:pk>/history/', views.generalinfo_history, name='generalinfo_history'),
     path('generalinfo/<int:pk>/revert/<int:history_id>/', views.revert_generalinfo, name='revert_generalinfo'),
+ 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
