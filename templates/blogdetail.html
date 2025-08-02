@@ -15,9 +15,9 @@ storytelling, Luo culture{% endblock %}
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
-                    <a href="#"><i class="fa fa-home"></i> Home</a>
-                    <a href="#">Blog</a>
-                    <span>Benga Music story telling</span>
+                    <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                    <a href="{% url 'blog' %}">Blog</a>
+                    <span>{{ blog.title }}</span>
                 </div>
             </div>
         </div>
@@ -32,17 +32,17 @@ storytelling, Luo culture{% endblock %}
             <div class="col-lg-8">
                 <div class="blog__details__content">
                     <div class="blog__details__item">
-                        <div class="blog__details__item__pic set-bg" data-setbg="{% static 'img/blog/details/isanda.png' %}">
-                            <a href="#"><i class="fa fa-share-alt"></i></a>
+                        <div class="blog__details__item__pic set-bg" data-setbg="{{ blog.blog_image.url }}">
+                            <a href=""><i class="fa fa-share-alt"></i></a>
                         </div>
                         <div class="blog__details__item__text">
-                            <span>ISANDA</span>
-                            <h3>STORY BEHIND THE SONG. </h3>
+                            <span>{{ blog.category }}</span>
+                            <h3>{{ blog.title }} </h3>
                             <div class="blog__details__item__widget">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <ul>
-                                            <li>By <span>Odhi The Villager Featuring Akech Oyosi</span></li>
+                                            <li>By <span>{{ blog.author }}</span></li>
 
                                         </ul>
                                     </div>
@@ -50,8 +50,8 @@ storytelling, Luo culture{% endblock %}
                                         <ul>
 
                                         <li>
-                                            <a href="https://youtu.be/JjgfEkXezTg" target="_blank" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-youtube-play"></i> Watch on YouTube
+                                            <a href="{{ blog.link }}" target="_blank" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-youtube-play"></i> Watch Video
                                             </a>
                                       </li>
                                         </ul>
@@ -61,72 +61,12 @@ storytelling, Luo culture{% endblock %}
                         </div>
                     </div>
                     <div class="blog__details__desc">
-                        <p>This song may go down in history as one of the last songs the legendary Tedd Josiah recorded
-                            for public consumption. However, for reasons, beyond human control, but which I wouldn't
-                            like to go into here, he was unable to complete the project, so the final bits were tied up
-                            elsewhere.
-                            A few years ago, I was introduced to Tedd by Titi Solomon, who had in turn Ben introduced to
-                            me buy my friend Makadem, who both felt that Tedd would bring out an angle from my music
-                            which had not come out in my earlier recordings. We had initially only planned for 1 song,
-                            but within 5 days, we'd agreed to do 2 songs, one of which (Jawar Nitie), has already been
-                            shared in both YouTube and Facebook "Odhi the Villager" pages. In the course of our studio
-                            engagements, I informed Tedd that at home in Homa Bay I had regular gigs with the living
-                            legend, him of Benga history, Samuel Akech Jabuya, aka Akech Oyosi - the man who at around
-                            age 20 years actually imagined and founded the then revolutionary Benga sound (now
-                            world-renowned) in early 1960s, while a member of Ogara Boys Band. Tedd was very excited,
-                            and asked me to bring along Oyosi at the earliest opportunity.
-                            When Akech came, he was adamant that he would not record (or even play) Benga, stating that,
-                            as a creative artist, he no longer found any excitement in the genre. He had carried along a
-                            self-made xylophone, on which he had creating new sounds. So as a compromise with Tedd, he
-                            only agreed to do a remix of one of his older songs before recording his xylophone song. .
+                        <p>
+                            {{ blog.content|safe }}
                         </p>
 
                     </div>
-                    <div class="blog__details__quote">
-                        <p>Meanwhile, I had also come along with my long time Duol companion, master orutu player
-                            Kenneth Oguda JaMariri, with the intention of spicing one of my songs. Oguda and I come a
-                            long way, and have a load of songs composed - only a few released so far. At one point
-                            during the recording, Akech excused himself to have a short puff (as a doctor I've had a
-                            futile prolonged struggle to have him even just reduce on his tobacco consumption!). Tedd
-                            also went to warm for us some drinking water (we like sipping that a lot when recording), as
-                            Oguda and I rehearsed an old mournful orutu tune we loved to do during interludes. When Tedd
-                            came back, he asked me to call Akech back in. I playfully called out his name loudly. He
-                            didn't respond! I called out louder. Still silent. The third time I was much louder, but
-                            mockingly made it sound like the way mothers call out a child in the village. He then
-                            mumbled some incoherent response, which made all of us burst out laughing.
-                            Tedd excitedly noted: "That sounds very interesting", and suggested that instead of adding
-                            the orutu skit to the previous songs I'd done, we use it to create a new song, with that
-                            playful call (and response) as a nidus. So as Oguda continued playing the mournful orutu
-                            skit, I immediately created a simple 2-chord backing rhythm. Tedd quietly muttered:
-                            "Perfect!", hooked the orutu to a mike, and the basic first 3 tracks of a new song were
-                            made. He released us, till the next day, to work further on the song, especially the lyrics!
-                        </p>
-
-                    </div>
-                    <div class="blog__details__desc">
-                        <p>The following day, I only had a few lines of lyrics, but I suggested the theme name "Ichanda"
-                            ("You are disturbing me"), from the skeleton I was creating. Meanwhile, Tedd completed
-                            Oyosi's songs and gave us a break a 3-week break.
-                            I felt that "persecution" (sand) and "ill-will" would create a more powerful theme than
-                            "disturbance" (chand) or thak (frustration). I was especially focused on the evil meted by
-                            people who are paradoxically considered "good" by society - people with power and authority,
-                            and the ability to hide their "badness", as they publicise their goodness, yet, under this
-                            cover, are terribly evil. I thought of the worldwide ubiquitous story of the generous woman
-                            and the "thankless" hunchback/beggar (etc) whose only response to any assistance the woman
-                            gave was (in the Dholuo version): "Itimo marach itimo ne in! Itimo maber itimo ne in" ("The
-                            evil you do, you do to yourself! The good you do, you do to yourself"). The Hindu version,
-                            adopted by English speakers go: "“The evil you do, remains with you: The good you do, comes
-                            back to you!” You probably know others with slight variations.
-                            .</p>
-                        <p>When we came back 3 weeks later, I had officially changed the title to "Isanda" (You are
-                            persecuting me"). We all agreed to make the song short and very simple! A keyboard solo
-                            track was recorded (but we all agreed it was weak). (Much later, I discarded it, preferring
-                            a lower-octave orutu instead).
-                            The songs were thereafter in limbo for a number of years, as I tried to look for a
-                            production engineer who would complete them, with the same original spirit intact. I head
-                            intended to release it late last year, but for some reasons, my spirit refused! It has now
-                            agreed!😀</p>
-                    </div>
+                    
                     <div class="blog__details__tags">
                         <a href="#">Music</a>
                         <a href="#">Festival</a>
@@ -183,7 +123,7 @@ storytelling, Luo culture{% endblock %}
                                     </div>
                                     <div class="blog__details__services__item__text">
                                         <h6>
-                                            <a href="">
+                                            <a href="{% url 'blogdetail' blog_id=blog.id %}">
                                                 {{ blog.title|truncatechars:40 }}
                                             </a>
                                         </h6>
@@ -241,7 +181,7 @@ storytelling, Luo culture{% endblock %}
                         </div>
                     
                         {% for blog in recent_blogs %}
-                        <a href="" class="recent__item">
+                        <a href="{% url 'blogdetail' blog_id=blog.id %}" class="recent__item">
                             <div class="recent__item__pic">
                                 {% if blog.blog_image %}
                                 <img src="{{ blog.blog_image.url }}" alt="{{ blog.title }}">

@@ -37,12 +37,21 @@ def contact(request):
     }
     return render(request, "contact.html", context)
 
+    
+  
 def blog(request):
-    return render(request, "blog.html", {"message": "Welcome to the OdhiTheVillager blog."})
+    recent_blogs = Blogs.objects.all().order_by('-created_at')  # Get all blogs ordered by creation date
+    return render(request, "blog.html", {'recent_blogs': recent_blogs})
 
-def blogdetail(request):
-    recent_blogs = Blogs.objects.all().order_by('-created_at')[:4]  # Get the 4 most recent blogs
-    return render(request, "blogdetail.html", {'recent_blogs': recent_blogs})
+
+def blogdetail(request, blog_id):
+    blog = Blogs.objects.get(id=blog_id)
+    recent_blogs = Blogs.objects.all().exclude(id=blog_id).order_by('-created_at')[:4]  # Get the 4 most recent blogs
+    return render(request, "blogdetail.html", {
+        'blog': blog,
+        'recent_blogs': recent_blogs
+    })
+
 
 def video(request):
     hero = Hero.objects.first()

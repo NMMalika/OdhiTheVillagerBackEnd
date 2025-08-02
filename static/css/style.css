@@ -3550,3 +3550,51 @@ ol {
     opacity: 1;
   }
 }
+.animated-card {
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.animated-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-on-hover img {
+    transition: transform 0.4s ease;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.zoom-on-hover:hover img {
+    transform: scale(1.05);
+}
+
+.blog__category {
+    color: #ff4a57;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.blog__title {
+    margin-top: 5px;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.blog__meta {
+    padding: 0;
+    margin: 8px 0 0 0;
+    list-style: none;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.blog__meta li {
+    display: inline-block;
+    margin-right: 15px;
+}
