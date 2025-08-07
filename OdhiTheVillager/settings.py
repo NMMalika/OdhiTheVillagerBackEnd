@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "odhi",
     'simple_history',
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -68,7 +69,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "odhi.context_processors.general_info"
+                "odhi.context_processors.newsletter_form",
+                "odhi.context_processors.general_info",
+                
             ],
         },
     },

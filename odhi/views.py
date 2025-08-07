@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.core.paginator import Paginator
 from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs
 from django.contrib import messages
+from .forms import NewsletterForm
+from .models import NewsletterSubscriber
 
 
 
@@ -42,7 +44,10 @@ def contact(request):
   
 def blog(request):
     recent_blogs = Blogs.objects.all().order_by('-created_at')  # Get all blogs ordered by creation date
-    return render(request, "blog.html", {'recent_blogs': recent_blogs})
+    paginator = Paginator(recent_blogs, 5)  # Show 5 blogs per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "blog.html", {'page_obj': page_obj, 'recent_blogs': recent_blogs})
 
 
 def blogdetail(request, blog_id):
@@ -86,3 +91,16 @@ def revert_generalinfo(request, pk, history_id):
         return redirect('generalinfo_history', pk=pk)
 
     return render(request, 'confirm_revert.html', {'object': obj, 'historical': historical})
+
+def subscribe(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            NewsletterSubscriber.objects.get_or_create(name=name, email=email)
+            messages.success(request, "Thanks for subscribing!")
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            messages.error(request, "Invalid input. Try again.")
+    return redirect('/')

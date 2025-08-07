@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs
+from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs,NewsletterSubscriber
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -68,3 +68,6 @@ class FAQsAdmin(admin.ModelAdmin):
 class BlogsAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'created_at']
     search_fields = ['title', 'author']
+
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subscribed_at') 

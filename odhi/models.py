@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -145,7 +146,7 @@ class Blogs(models.Model):
     blog_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     category = models.CharField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = RichTextField()  # Using CKEditor for rich text editing
     author = models.CharField(max_length=100 , default="Kepher Odhiambo Mak'Anyengo")
     created_at = models.DateTimeField(default=timezone.now)
     link = models.URLField(max_length=200, blank=True, null=True)
@@ -157,3 +158,11 @@ class Blogs(models.Model):
 
     def __str__(self):
         return self.title
+
+class NewsletterSubscriber(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
