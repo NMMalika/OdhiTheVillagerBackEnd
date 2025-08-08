@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "odhi",
     'simple_history',
-    "ckeditor",
+    'tinymce',
 ]
 
 MIDDLEWARE = [

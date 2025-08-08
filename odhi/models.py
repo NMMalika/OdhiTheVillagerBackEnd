@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
-from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
 
 
 # Create your models here.
@@ -142,11 +142,12 @@ class Subscriber(models.Model):
 
     def __str__(self):
         return self.email
+    
 class Blogs(models.Model):
     blog_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     category = models.CharField(max_length=100, blank=True, null=True)
     title = models.CharField(max_length=255)
-    content = RichTextField()  # Using CKEditor for rich text editing
+    content = HTMLField()
     author = models.CharField(max_length=100 , default="Kepher Odhiambo Mak'Anyengo")
     created_at = models.DateTimeField(default=timezone.now)
     link = models.URLField(max_length=200, blank=True, null=True)
@@ -166,3 +167,22 @@ class NewsletterSubscriber(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+
+class Comment(models.Model):
+    blog = models.ForeignKey("Blogs", on_delete=models.CASCADE, related_name="comments")
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15, blank=True, null=True)  # Optional field
+    comment = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    approved = models.BooleanField(default=False)  # Admin approval
+
+    def __str__(self):
+        return f"{self.name} - {self.comment[:30]}"
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"

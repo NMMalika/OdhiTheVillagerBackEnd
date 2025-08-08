@@ -112,7 +112,18 @@ storytelling, Luo culture{% endblock %}
                     
                         </div>
                     </div>
-
+                    <hr>
+                        <!-- Display approved comments -->
+                        <h3>{{ comments.count }} Comment{{ comments.count|pluralize }}</h3>
+                        {% for comment in comments %}
+                        <div class="single-comment">
+                            <h5>{{ comment.name }}</h5>
+                            <small>{{ comment.created_at|date:"M d, Y" }}</small>
+                            <p>{{ comment.comment }}</p>
+                        </div>
+                        {% empty %}
+                        <p>No comments yet. Be the first!</p>
+                        {% endfor %}
                     <div class="blog__details__services">
                         <div class="row">
                             <div class="col-lg-12">
@@ -141,19 +152,16 @@ storytelling, Luo culture{% endblock %}
                             {% endfor %}
                         </div>
                     </div>
-
+                    <hr>
+                    <!-- Comment Form -->
                     <div class="blog__details__form">
                         <div class="blog__details__form__title">
                             <h4>Leave a comment</h4>
                         </div>
-                        <form action="#">
-                            <div class="input__list">
-                                <input type="text" placeholder="Name">
-                                <input type="text" placeholder="Email">
-                                <input type="text" placeholder="Website">
-                            </div>
-                            <textarea placeholder="Comment"></textarea>
-                            <button type="submit" class="site-btn">SEND MESSAGE</button>
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="site-btn">Send Message</button>
                         </form>
                     </div>
                 </div>

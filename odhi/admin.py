@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs,NewsletterSubscriber
+from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs,NewsletterSubscriber,Comment
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -71,3 +71,12 @@ class BlogsAdmin(admin.ModelAdmin):
 
 class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subscribed_at') 
+    
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'blog', 'approved', 'created_at')
+    list_filter = ('approved', 'created_at', 'blog')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)

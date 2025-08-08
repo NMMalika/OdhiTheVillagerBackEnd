@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from  odhi import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,6 +30,7 @@ urlpatterns = [
     path("video/",views.video,name="video"),
     path('generalinfo/<int:pk>/history/', views.generalinfo_history, name='generalinfo_history'),
     path('generalinfo/<int:pk>/revert/<int:history_id>/', views.revert_generalinfo, name='revert_generalinfo'),
+    path('tinymce/', include('tinymce.urls'))
  
 ]
 if settings.DEBUG:

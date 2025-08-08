@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
-from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs
+from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs,Comment
 from django.contrib import messages
-from .forms import NewsletterForm
+from .forms import NewsletterForm,CommentForm
 from .models import NewsletterSubscriber
 
 
@@ -58,11 +58,27 @@ def blogdetail(request, blog_id):
 
     # Next post: blog with ID greater than current (newer)
     next_blog = Blogs.objects.filter(id__gt=blog_id).order_by('id').first()
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = blog  # Link comment to this blog
+            comment.save()
+            return redirect('blogdetail', blog_id=blog.id)
+    else:
+        form = CommentForm()
+
+    
+    comments = blog.comments.filter(approved=True).order_by('-created_at')
+    
     return render(request, "blogdetail.html", {
         'blog': blog,
         'recent_blogs': recent_blogs,
         'previous_blog': previous_blog,
-        'next_blog': next_blog
+        'next_blog': next_blog,
+        'form': form,
+        'comments': comments
     })
 
 
