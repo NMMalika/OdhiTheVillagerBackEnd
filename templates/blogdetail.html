@@ -1,5 +1,7 @@
+
 {% extends "assests/main.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}BlogsDetails Odhi the Villager | Kenyan Benga Musician{% endblock %}
 {% block meta_description %}Discover the story of Odhi the Villager, a Kenyan Benga musician blending culture, rhythm, and storytelling through
@@ -113,17 +115,27 @@ storytelling, Luo culture{% endblock %}
                         </div>
                     </div>
                     <hr>
-                        <!-- Display approved comments -->
+                    <div class="comments-list">
                         <h3>{{ comments.count }} Comment{{ comments.count|pluralize }}</h3>
                         {% for comment in comments %}
-                        <div class="single-comment">
-                            <h5>{{ comment.name }}</h5>
-                            <small>{{ comment.created_at|date:"M d, Y" }}</small>
-                            <p>{{ comment.comment }}</p>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-avatar">
+                                    {{ comment.name|first|upper }}
+                                </div>
+                                <div>
+                                    <div class="comment-author">{{ comment.name }}</div>
+                                    <div class="comment-date">{{ comment.created_at|date:"M d, Y" }}</div>
+                                </div>
+                            </div>
+                            <div class="comment-text">
+                                {{ comment.comment|linebreaksbr }}
+                            </div>
                         </div>
                         {% empty %}
                         <p>No comments yet. Be the first!</p>
                         {% endfor %}
+                    </div>
                     <div class="blog__details__services">
                         <div class="row">
                             <div class="col-lg-12">
@@ -160,7 +172,37 @@ storytelling, Luo culture{% endblock %}
                         </div>
                         <form method="post">
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        {{ form.name.label_tag }}
+                                        {{ form.name|add_class:"form-control" }}
+                                        {{ form.name.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        {{ form.email.label_tag }}
+                                        {{ form.email|add_class:"form-control" }}
+                                        {{ form.email.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="form-group">
+                                        {{ form.phone_number.label_tag }}
+                                        {{ form.phone_number|add_class:"form-control" }}
+                                        {{ form.phone_number.errors }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.comment.label_tag }}
+                                        {{ form.comment|add_class:"form-control" }}
+                                        {{ form.comment.errors }}
+                                    </div>
+                                </div>
+                            </div>
+                           
                             <button type="submit" class="site-btn">Send Message</button>
                         </form>
                     </div>

@@ -3612,3 +3612,132 @@ ol {
     display: inline-block;
     margin-right: 15px;
 }
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.form-control:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+}
+/* Match form fields to the theme */
+.blog__details__form input,
+.blog__details__form textarea {
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+/* Hover / focus effect */
+.blog__details__form input:focus,
+.blog__details__form textarea:focus {
+  border-color: #6a0dad;
+  /* Purple shade from your button */
+  box-shadow: 0 0 8px rgba(106, 13, 173, 0.3);
+}
+
+/* Match textarea height nicely */
+.blog__details__form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Style the button (already has .site-btn but ensuring full width and matching feel) */
+.blog__details__form .site-btn {
+  background-color: #6a0dad;
+  /* Purple */
+  color: #fff;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.blog__details__form .site-btn:hover {
+  background-color: #580a9c;
+  /* Darker purple on hover */
+}
+/* Comment section wrapper */
+.comments-list {
+    margin-top: 30px;
+}
+
+/* Each comment card */
+.comment {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+/* Comment header (name + date) */
+.comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #6a0dad; /* Purple theme */
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.comment-meta {
+    font-size: 14px;
+    color: #777;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #333;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Comment text */
+.comment-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    margin-top: 5px;
+}
+

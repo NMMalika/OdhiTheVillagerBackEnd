@@ -20,6 +20,10 @@ from  odhi import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = "Odhi The Villager Admin"
+admin.site.site_title = "Odhi Admin Portal"
+admin.site.index_title = "Welcome to the Admin Portal"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
