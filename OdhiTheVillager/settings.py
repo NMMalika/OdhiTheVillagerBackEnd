@@ -134,3 +134,22 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Odhi The Villager Admin",
+    "site_header": "Odhi Admin Panel",
+    "welcome_sign": "Manage Odhi The Villager Content",
+    "site_logo": "img/logo.png",  # must be in your static folder
+    "copyright": "Odhi The Villager © 2025",
+
+    "topmenu_links": [
+        {"name": "Dashboard", "url": "admin:index"},
+        {"name": "View Site", "url": "/", "new_tab": True},
+    ],
+
+    "icons": {
+        "odhi.Blogs": "fas fa-blog",
+        "odhi.Comment": "fas fa-comments",
+        "auth.User": "fas fa-user",
+    },
+}
