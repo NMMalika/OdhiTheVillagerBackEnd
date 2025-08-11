@@ -146,10 +146,25 @@ JAZZMIN_SETTINGS = {
         {"name": "Dashboard", "url": "admin:index"},
         {"name": "View Site", "url": "/", "new_tab": True},
     ],
+     "order_with_respect_to": [
+        "auth", "odhi.Blog", "odhi.Album", "odhi.Comment",
+        "odhi.EventMusic", "odhi.EventType", "odhi.FAQ",
+        "odhi.GeneralInfo", "odhi.Hero", "odhi.LatestTrack",
+        "odhi.OtherVideo"
+    ],
 
     "icons": {
         "odhi.Blogs": "fas fa-blog",
         "odhi.Comment": "fas fa-comments",
         "auth.User": "fas fa-user",
+        "auth.User": "fas fa-user",
+        "odhi.Albums": "fas fa-music",
+        "odhi.EventMusic": "fas fa-guitar",
+        "odhi.EventType": "fas fa-calendar",
+        "odhi.FAQ": "fas fa-question-circle",
+        "odhi.GeneralInfo": "fas fa-info-circle",
+        "odhi.Hero": "fas fa-star",
+        "odhi.LatestTrack": "fas fa-headphones",
+        "odhi.OtherVideo": "fas fa-video",
     },
 }

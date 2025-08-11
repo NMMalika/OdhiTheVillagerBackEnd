@@ -3740,4 +3740,46 @@ ol {
     color: #444;
     margin-top: 5px;
 }
+/* your_style.css */
+
+.scroll-top {
+  position: fixed;
+  /* Stays in the same spot on the screen */
+  bottom: 20px;
+  right: 20px;
+
+  /* Initially hidden */
+  opacity: 0;
+  visibility: hidden;
+
+  /* Smooth transition for fading in/out */
+  transition: all 0.3s ease-in-out;
+
+  /* Styling */
+  width: 40px;
+  height: 40px;
+  background-color: #000000;
+  /* Example blue color */
+  color: blue;
+  border-radius: 50%;
+  /* Makes it a circle */
+  text-decoration: none;
+
+  /* These are from your HTML, but good to have in CSS too */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* This class will be added by JavaScript to show the button */
+.scroll-top.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Optional: Add a hover effect */
+.scroll-top:hover {
+  background-color: #0056b3;
+}
 

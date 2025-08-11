@@ -4,6 +4,7 @@ from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestT
 from django.shortcuts import redirect
 from django.contrib import messages
 
+
 admin.site.register(Generalinfo, SimpleHistoryAdmin)
 class GeneralinfoAdmin(admin.ModelAdmin):
     list_display = ('logo', 'location', 'email', 'phone')
@@ -68,6 +69,14 @@ class FAQsAdmin(admin.ModelAdmin):
 class BlogsAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'created_at']
     search_fields = ['title', 'author']
+    
+    def view_link(self, obj):
+        return f'<a href="{obj.get_absolute_url()}" target="_blank">View</a>'
+    view_link.allow_tags = True
+    view_link.short_description = "Preview"
+
+    def view_on_site(self, obj):
+        return obj.get_absolute_url()
 
 class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'subscribed_at') 

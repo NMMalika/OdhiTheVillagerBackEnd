@@ -3,6 +3,7 @@ from django.utils import timezone
 from simple_history.models import HistoricalRecords
 from django.utils import timezone
 from tinymce.models import HTMLField
+from django.urls import reverse
 
 
 # Create your models here.
@@ -159,7 +160,10 @@ class Blogs(models.Model):
 
     def __str__(self):
         return self.title
-
+    def get_absolute_url(self):
+        
+        return reverse("blogdetail", kwargs={"blog_id": self.id})
+    
 class NewsletterSubscriber(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
