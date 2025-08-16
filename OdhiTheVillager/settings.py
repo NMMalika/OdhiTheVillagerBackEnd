@@ -14,19 +14,6 @@ from pathlib import Path
 import os
 import dj_database_url
 
-RAILWAY_DOMAIN = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
-RAILWAY_SERVICE_DOMAIN = os.environ.get("RAILWAY_PRIVATE_DOMAIN")
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-
-if RAILWAY_DOMAIN:
-    ALLOWED_HOSTS.append(RAILWAY_DOMAIN)
-
-if RAILWAY_SERVICE_DOMAIN:
-    ALLOWED_HOSTS.append(RAILWAY_SERVICE_DOMAIN)
-
-# Optional: allow Railway's default *.up.railway.app domain
-ALLOWED_HOSTS.append("odhithevillagerbackend-production.up.railway.app")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
