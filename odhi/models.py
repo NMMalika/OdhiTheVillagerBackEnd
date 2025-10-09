@@ -176,6 +176,7 @@ class NewsletterSubscriber(models.Model):
 
 
 class Comment(models.Model):
+    
     blog = models.ForeignKey("Blogs", on_delete=models.CASCADE, related_name="comments")
     name = models.CharField(max_length=100)
     email = models.EmailField()
