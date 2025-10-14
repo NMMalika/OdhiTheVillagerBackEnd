@@ -1,6 +1,7 @@
+from sched import Event
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs,NewsletterSubscriber,Comment
+from .models import Generalinfo, Hero, OtherVideo, EventType,EventMusic, LatestTrack,Album,FAQ, Blogs,NewsletterSubscriber,Comment,Video,Event
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -89,3 +90,20 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(approved=True)
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'release_datetime', 'is_released_display')
+    list_filter = ('release_datetime',)
+    search_fields = ('title',)
+
+    def is_released_display(self, obj):
+        return obj.is_released()
+    is_released_display.short_description = 'Released'
+    is_released_display.boolean = True
+    
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'place', 'youtube', 'itunes', 'soundcloud', 'apple_music', 'hustlesasa', 'other')

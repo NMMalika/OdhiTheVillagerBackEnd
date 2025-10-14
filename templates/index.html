@@ -8,54 +8,98 @@
 
 {% block content %}
     <!-- Hero Section Begin -->
-    <section class="hero spad set-bg" data-setbg="{{ hero.image.url }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+    <section class="hero spad hero--split" style="background-image: url('{{ hero.image.url }}');">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 hero__left">
                     <div class="hero__text">
-                        <span>New single</span>
+                        <span>New Single</span>
                         <h1>{{ hero.title }}</h1>
                         <p>{{ hero.description }}</p>
-                       <a data-fancybox href="{{ hero.youtube_link }}" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                        <a href="#" id="playVideo" class="play-btn" data-video-id="{{ hero.youtube_link|slice:'-11:' }}"
+                            data-video-title="{{ hero.title }}">
+                            <i class="fa fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+    
+                <div class="col-lg-6 col-md-12 hero__right">
+                    <div class="hero__preview" id="videoPreview">
+                        {% with video_id=hero.youtube_link|slice:"-11:" %}
+                        <img src="https://img.youtube.com/vi/{{ video_id }}/hqdefault.jpg" alt="{{ hero.title }}"
+                            class="video-thumb">
+                        {% endwith %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="linear__icon">
-            <i class="fa fa-angle-double-down"></i>
         </div>
     </section>
     <!-- Hero Section End -->
 
-    <!-- Other Videos Section Begin -->
-        <section class="event spad">
+        <!-- Event Section Begin -->
+<section class="event spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title">
-                    <h2>OTHER VIDEOS</h2>
+                    <h2>Upcoming Events</h2>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            {% for video in videos %}
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" width="100%" height="200" src="https://www.youtube.com/embed/{{ video.video_id }}" frameborder="0" allowfullscreen></iframe>
+        <div class="event__slider owl-carousel">
+            {% for event in events %}
+            <div class="event__item">
+                <div class="event__item__pic set-bg" data-setbg="{{ event.image.url }}">
+                    <div class="tag-date">
+                        <span>{{ event.formatted_date }}</span>
+                    </div>
                 </div>
-                <div class="video-caption text-center mt-2">
-                    <span>{{ video.artist|title }} - {{ video.year }}</span><br>
-                    <h5>{{ video.title }}</h5>
-                    <p>{{ video.caption }}</p>
+                <div class="event__item__text">
+                    <h4>{{ event.title }}</h4>
+
+                    {% if event.place %}
+                    <p><i class="fa fa-map-marker"></i> {{ event.place }}</p>
+                    {% endif %}
+                    {% if event.youtube %}
+                    <p><i class="fab fa-youtube"></i>
+                        <a href="{{ event.youtube }}" target="_blank">Watch on YouTube</a>
+                    </p>
+                    {% endif %}
+                    {% if event.itunes %}
+                    <p><i class="fab fa-itunes"></i>
+                        <a href="{{ event.itunes }}" target="_blank">Listen on iTunes</a>
+                    </p>
+                    {% endif %}
+                    {% if event.soundcloud %}
+                    <p><i class="fab fa-soundcloud"></i>
+                        <a href="{{ event.soundcloud }}" target="_blank">Play on SoundCloud</a>
+                    </p>
+                    {% endif %}
+                    {% if event.apple_music %}
+                    <p><i class="fab fa-apple"></i>
+                        <a href="{{ event.apple_music }}" target="_blank">Apple Music</a>
+                    </p>
+                    {% endif %}
+                    {% if event.hustlesasa %}
+                    <p><i class="fa fa-shopping-cart"></i>
+                        <a href="{{ event.hustlesasa }}" target="_blank">Buy on HustleSasa</a>
+                    </p>
+                    {% endif %}
+                    {% if event.other %}
+                    <p><a href="{{ event.other }}" target="_blank">{{ event.other }}</a></p>
+                    {% endif %}
                 </div>
             </div>
+            {% empty %}
+            <p>No upcoming events yet.</p>
             {% endfor %}
         </div>
     </div>
 </section>
 
 
-    <!-- Event Section End -->
+        <!-- Event Section End -->
 
     <!-- About Section Begin -->
     <section class="about spad">
@@ -72,13 +116,25 @@
                             <h2>odhi the villager</h2>
                             <h1>About me</h1>
                         </div>
-                        <p>Since my childhood, I've been joined at the hips with music, virtually like Siamese twins. In 1974, I started learning how to play the guitar, which was made immensely easy by the songs I could sing back from memory. Within 2 years, I could confidently play rythm guitar on stage, with a high school band called The Vampires (Hehehehe! I was not responsible for the name). In 1979, my former high school members and I formed the Movers Band at the University of Nairobi. In 1982, I teamed up with a lady I sometimes simply call "My Love", to record a song I called "I believe in me", the first time a Kenyan did sequential multiple track recording (at the then ultra modern CBS 16 track studio in Nairobi), which was released just before the 1982 failed coup attempt. Because of a phrase in the song "Security means nothing to me if all it means is keeping of arms", the music presenters panicked, & the song was literally hastily removed from the library to the archives - by then it was No: 7 in the English charts.
-                            Since then I became a musical recluse and decided to play only for myself. In 2008 I released a 10 track CD, but was reluctant to promote as I was informed by the players: "You must facilitate". I kef ap!
-                            My style is based on (but not locked to) Benga music, one of whose original founders (namely Samuel Akech Jabuya aka Akech Oyosi) is a friend of mine and those who are my friends @ Kepher Odhiambo Mak'Anyengo have already met).
-                            I'm in the final phase of recording 4 songs, 2 of which we've collaborated with Akech Oyosi, and one is a tribute to the one we did "I believe....." with. 
-                            As a person, I've never understood nor accepted the concept of competition in music, so whenever I'll pay my songs on this or other forum, I urge you to listen to them DEEPLY and try to pry at what I'm communicating. When I compose my songs I don't compete with anybody, so what parameters will you use to compare? I'll also not extol any song here, as I believe that may undulyinfluence your analysis. I may explain, or present and translate lyrics, or explain a style, but that may be all. 
-                            By inviting you here, I'm asking you to join me in this journey of creating better music.
-                            Karibu!</p>
+                        <p>Since my childhood, I've been joined at the hips with music, virtually like Siamese twins. In 1974, I started
+                            learning how to play the guitar, which was made immensely easy by the songs I could sing back from memory.
+                            Within 2 years, I could confidently play rythm guitar on stage, with a high school band called The Vampires.</p>
+                    
+                        <p>In 1979, my former high school members and I formed the Movers Band at the University of Nairobi. In 1982, I
+                            teamed up with a lady I sometimes simply call "My Love", to record a song I called "I believe in me"—the first
+                            time a Kenyan did sequential multiple track recording at the then ultra-modern CBS 16 track studio in Nairobi.
+                        </p>
+                    
+                        <blockquote class="about-quote">
+                            "Because of a phrase in the song 'Security means nothing to me if all it means is keeping of arms', the music
+                            presenters panicked, & the song was literally hastily removed from the library to the archives - by then it was
+                            No: 7 in the English charts."
+                        </blockquote>
+                    
+                        <p>Since then I became a musical recluse and decided to play only for myself. In 2008 I released a 10 track CD, but
+                            was reluctant to promote. My style is based on (but not locked to) Benga music, one of whose original founders
+                            (namely Samuel Akech Jabuya aka Akech Oyosi) is a friend of mine.</p>
+                        <p>By inviting you here, I'm asking you to join me in this journey of creating better music. Karibu!</p>
                         <a href="#" class="primary-btn">CONTACT ME</a>
                     </div>
                 </div>
@@ -228,24 +284,85 @@
             </div>
     </div>
 </section>
-    <!-- Albums Section End -->
+<!-- Other Videos Section Begin -->
+<section class="event spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>OTHER VIDEOS</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="video-card">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" width="100%" height="200"
+                            src="https://www.youtube.com/embed/{{ video.video_id }}" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="video-caption text-center mt-2">
+                        <span>{{ video.artist|title }} - {{ video.year }}</span><br>
+                        <h5>{{ video.title }}</h5>
+                        <p>{{ video.caption }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
 
     <!-- Countdown Section Begin -->
-    <section class="countdown spad set-bg" data-setbg="{% static 'img/countdown.jpg' %}">
+    <section class="countdown spad set-bg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 text-center">
                     <div class="countdown__text">
-                        <h1>Odhi The Villager</h1>
-                        <h4>Benga Experience</h4>
+                        <h1>{{ video.title }}</h1>
+                        {% if not released %}
+                        <h4>Music video drops in</h4>
+                        {% else %}
+                        <h4>Now available!</h4>
+                        {% endif %}
                     </div>
-                    
+    
+                    {% if not released %}
+                    <div class="countdown__timer" id="countdown-time"
+                        data-deadline="{{ video.release_datetime|date:'Y-m-d H:i:s' }}">
+                        <div class="countdown__item"><span id="days">00</span>
+                            <p>Days</p>
+                        </div>
+                        <div class="countdown__item"><span id="hours">00</span>
+                            <p>Hours</p>
+                        </div>
+                        <div class="countdown__item"><span id="minutes">00</span>
+                            <p>Minutes</p>
+                        </div>
+                        <div class="countdown__item"><span id="seconds">00</span>
+                            <p>Seconds</p>
+                        </div>
+                    </div>
+                    {% endif %}
+    
                     <div class="buy__tickets">
-                        <a href="https://soundcloud.com/odhi-the-villager/" class="primary-btn">Buy Album</a>
+                        {% if released %}
+                        <a href="{% if video.youtube_link %}{{ video.youtube_link }}{% else %}{{ video.video_file.url }}{% endif %}"
+                            target="_blank" class="primary-btn">Watch Now</a>
+                        {% else %}
+                        <a href="#" class="primary-btn">Dropping Soon</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Countdown Section End -->
 {% endblock %}

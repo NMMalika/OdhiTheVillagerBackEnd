@@ -191,3 +191,37 @@ class Comment(models.Model):
         ordering = ['-created_at']
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+ 
+
+class Video(models.Model):
+    title = models.CharField(max_length=200)
+    release_datetime = models.DateTimeField()
+    video_file = models.FileField(upload_to='videos/', blank=True, null=True)
+    youtube_link = models.URLField(blank=True, null=True)
+
+    def is_released(self):
+        from django.utils import timezone
+        return timezone.now() >= self.release_datetime
+
+    def __str__(self):
+        return self.title
+    
+    
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    date = models.DateField()
+    image = models.ImageField(upload_to='events/')
+    place = models.CharField(max_length=255, blank=True, null=True)  # Physical location
+    youtube = models.URLField(blank=True, null=True)
+    itunes = models.URLField(blank=True, null=True)
+    soundcloud = models.URLField(blank=True, null=True)
+    apple_music = models.URLField(blank=True, null=True)
+    hustlesasa = models.URLField(blank=True, null=True)
+    other = models.URLField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
+    def formatted_date(self):
+        return self.date.strftime("%b %d, %Y")

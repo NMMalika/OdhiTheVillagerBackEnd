@@ -2,19 +2,31 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
-from .models import EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs,Comment
+from .models import Event,EventMusic, EventType, Generalinfo,Hero, OtherVideo, LatestTrack,Album,FAQ,Blogs,Comment
 from django.contrib import messages
 from .forms import NewsletterForm,CommentForm
 from .models import NewsletterSubscriber
+from django.utils import timezone
+from .models import Video
 
 
 
 def index(request):
+    now = timezone.now()
+    
+    video = Video.objects.filter(release_datetime__gte=now).order_by('release_datetime').first()
+    
+    if not video:
+        video = Video.objects.order_by('-release_datetime').first()
+
+    released = video.is_released() if video else False
+    
     hero = Hero.objects.first()  # Get the first hero object
     videos = OtherVideo.objects.all()
     eventtypes = EventType.objects.all()
     eventmusics = EventMusic.objects.first()
     latest_tracks = LatestTrack.objects.all()[:6]
+    events = Event.objects.filter(is_active=True).order_by('date')
     
     # Fetch all albums, ordered by the release date (newest first)
     albums = Album.objects.all()
@@ -25,7 +37,11 @@ def index(request):
         'eventtypes': eventtypes,
         'eventmusics': eventmusics,
         'latest_tracks': latest_tracks,
-        'albums': albums
+        'albums': albums,
+        'events': events,
+        'video': video,
+        'released': released,
+        'now': now,
     })
 def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})
@@ -120,3 +136,4 @@ def subscribe(request):
         else:
             messages.error(request, "Invalid input. Try again.")
     return redirect('/')
+

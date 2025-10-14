@@ -177,5 +177,8 @@ JAZZMIN_SETTINGS = {
         "odhi.Hero": "fas fa-star",
         "odhi.LatestTrack": "fas fa-headphones",
         "odhi.OtherVideo": "fas fa-video",
+        "odhi.Video": "fas fa-video",
+        "odhi.Event": "fas fa-video",
+        
     },
 }
