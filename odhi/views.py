@@ -47,12 +47,17 @@ def about(request):
     return render(request, "about.html", {"message": "This is the about page of OdhiTheVillager."})
 
 def contact(request):
-
-        
     faqs = FAQ.objects.all()
+    
+    # --- TEMPORARY DEBUG CODE ---
+    print(f"Number of FAQs retrieved: {faqs.count()}")
+    # --- END DEBUG CODE ---
+
+    test_message = "Your contact view is working correctly! 🎉"
+
     context = {
         'faqs': faqs,
-        #... other context data
+        'test_message': test_message,
     }
     return render(request, "contact.html", context)
 
@@ -137,3 +142,24 @@ def subscribe(request):
             messages.error(request, "Invalid input. Try again.")
     return redirect('/')
 
+def video(request):
+    now = timezone.now()
+    
+    # Reuse same logic as index
+    video = Video.objects.filter(release_datetime__gte=now).order_by('release_datetime').first()
+    if not video:
+        video = Video.objects.order_by('-release_datetime').first()
+
+    released = video.is_released() if video else False
+
+    # Add any other context you want on the video page
+    videos = OtherVideo.objects.all()
+    hero = Hero.objects.first()
+    
+    return render(request, "video.html", {
+        'video': video,
+        'released': released,
+        'now': now,
+        'videos': videos,
+        'hero': hero,
+    })

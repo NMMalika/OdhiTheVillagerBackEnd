@@ -2,144 +2,92 @@
 {% load static %}
 
 {% block title %}Odhi The Villager | Contact{% endblock %}
-{% block meta_description %}Get in touch with Odhi The Villager. Reach out to us for inquiries, support, or collaboration. We're here to help!{% endblock %}
-{% block meta_keywords %}contact, contact us, get in touch, reach out, customer support, customer service, inquiries, help, support, feedback,
+{% block meta_description %}Get in touch with Odhi The Villager. Reach out to us for inquiries, support, or
+collaboration. We're here to help!{% endblock %}
+{% block meta_keywords %}contact, contact us, get in touch, reach out, customer support, customer service, inquiries,
+help, support, feedback,
 contact form, business contact, email, phone number, address, FAQs{% endblock %}
 
 
 {% block content %}
-<section class="faq-9 faq section light-background" id="faq">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <h2>Have a question? Check out the FAQ</h2>
+            <p>use the contact us below to ask any question in the next section...</p>
+        </div>
+        <div class="col-lg-7">
+            <div class="faq-container">
+                {% for faq in faqs %}
+                <div class="faq-item">
+                    <span class="num">{{forloop.counter}}.</span>
+                    <div class="faq-question">
+                
+                        <h3>{{ faq.question }}</h3>
+                        <div class="faq-toggle">
+                            <i class="icon-plus fa-solid fa-plus"></i>
+                            <i class="icon-minus fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                    <div class="faq-content">
+                        <p>{{ faq.answer|linebreaks }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="contact spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-5" data-aos="fade-up">
-                <h2 class="faq-title">Have a question? Check out the FAQ</h2>
-                <p class="faq-description">Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit
-                    amet adipiscing sem neque sed ipsum.</p>
-                <div class="faq-arrow d-none d-lg-block" data-aos="fade-up" data-aos-delay="200">
-                </div>
-            </div>
-
-            <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
-                <div class="faq-container">
-
-                    {% for faq in faqs %}
-                    <div class="faq-item">
-                        <span class="num">{{forloop.counter}}.</span>
-                        <div class="faq-question">
-                             
-                            <h3>{{ faq.question }}</h3>
-                            <div class="faq-toggle">
-                                <i class="icon-plus fa-solid fa-plus"></i>
-                                <i class="icon-minus fa-solid fa-minus"></i>
-                            </div>
-                        </div>
-                        <div class="faq-content">
-                            <p>{{ faq.answer|linebreaks }}</p>
-                        </div>
-                    </div>{% endfor %}
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="contact" class="contact section light-background">
-
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-4 g-lg-5">
-            <div class="col-lg-5">
-                <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Contact Info</h3>
-                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum
-                        primis.</p>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box">
-                            <i class="bi bi-geo-alt"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Our Location</h4>
+            <div class="col-lg-4">
+                <div class="contact__address">
+                    <div class="section-title">
+                        <h2>Contact info</h2>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore.</p>
+                    <ul>
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            <h5>Location</h5>
                             <p>{{ general_info.location }}</p>
-
-                        </div>
-                    </div>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box">
-                            <i class="bi bi-telephone"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Phone Number</h4>
-                            <p>{{ general_info.phone }}</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="500">
-                        <div class="icon-box">
-                            <i class="bi bi-envelope"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Email Address</h4>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <h5>Phone Number</h5>
+                            <span>{{ general_info.phone }}</span>
+                            
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <h5>Email</h5>
                             <p>{{ general_info.email }}</p>
-                        </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="contact__form">
+                    <div class="section-title">
+                        <h2>Get in touch</h2>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-7">
-                <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
-                    <h3>Get In Touch</h3>
-                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum
-                        primis.</p>
-
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="row gy-4">
-
-                            <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                            </div>
-
-                            <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email"
-                                    required="">
-                            </div>
-
-                            <div class="col-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                    required="">
-                            </div>
-
-                            <div class="col-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message"
-                                    required=""></textarea>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                <button type="submit" class="btn">Send Message</button>
-                            </div>
-
+                    <p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+                        gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+                    <form action="#">
+                        <div class="input__list">
+                            <input type="text" placeholder="Name">
+                            <input type="text" placeholder="Email">
+                            <input type="text" placeholder="Phone Number">
                         </div>
+                        <textarea placeholder="Comment"></textarea>
+                        <button type="submit" class="site-btn">SEND MESSAGE</button>
                     </form>
-
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </section>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -161,5 +109,7 @@ contact form, business contact, email, phone number, address, FAQs{% endblock %}
         });
     });
 </script>
+
+
 
 {% endblock %}

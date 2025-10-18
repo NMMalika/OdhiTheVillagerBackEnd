@@ -26,29 +26,6 @@
   });
 
   /*--------------------------
-        Event Slider
-    ----------------------------*/
-  $(".event__slider").owlCarousel({
-    loop: true,
-    margin: 0,
-    items: 3,
-    dots: false,
-    nav: true,
-    navText: [
-      "<i class='fa fa-angle-left'></i>",
-      "<i class='fa fa-angle-right'></i>",
-    ],
-    smartSpeed: 1200,
-    autoHeight: false,
-    autoplay: true,
-    responsive: {
-      992: { items: 3 },
-      768: { items: 2 },
-      0: { items: 1 },
-    },
-  });
-
-  /*--------------------------
         Videos Slider
     ----------------------------*/
   $(".videos__slider").owlCarousel({
@@ -84,12 +61,8 @@
     --------------------*/
   if ($("#countdown-time").length > 0) {
     var deadline = $("#countdown-time").data("deadline");
-
     if (deadline) {
-      // Convert Django date (e.g. 2025-10-15T20:30:00) to JS Date
       var targetDate = new Date(deadline);
-
-      // Initialize countdown if plugin is loaded
       $("#countdown-time").countdown(targetDate, function (event) {
         $(this).html(
           event.strftime(
@@ -142,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (playButton && videoPreview) {
     playButton.addEventListener("click", function (e) {
       e.preventDefault();
-
       const videoId = playButton.dataset.videoId;
       const videoTitle = playButton.dataset.videoTitle;
 
@@ -168,25 +140,41 @@ document.addEventListener("DOMContentLoaded", function () {
 $(document).ready(function () {
   var eventCount = $(".event__slider .event__item").length;
 
-  // Set image backgrounds
   $(".set-bg").each(function () {
     var bg = $(this).data("setbg");
     $(this).css("background-image", "url(" + bg + ")");
   });
 
-  // Initialize carousel
-  $(".event__slider").owlCarousel({
-    loop: eventCount > 3, // Only loop if more than 3 events
-    margin: 30,
-    items: Math.min(eventCount, 3), // Show as many as available (max 3)
-    autoplay: eventCount > 1,
-    autoplayTimeout: 5000,
-    smartSpeed: 700,
-    center: eventCount < 3, // Center items if less than 3
-    responsive: {
-      0: { items: 1 },
-      768: { items: Math.min(eventCount, 2) },
-      992: { items: Math.min(eventCount, 3) },
-    },
-  });
+  // ✅ Adjust slider settings dynamically
+  if (eventCount <= 1) {
+    // Only one event — no carousel, show single item centered
+    $(".event__slider").trigger("destroy.owl.carousel");
+    $(".event__slider").removeClass("owl-carousel");
+    $(".event__item").css({
+      margin: "0 auto",
+      display: "block",
+      maxWidth: "500px",
+    });
+  } else {
+    // Multiple events — use normal carousel
+    $(".event__slider").owlCarousel({
+      loop: eventCount > 3,
+      margin: 30,
+      items: Math.min(eventCount, 3),
+      autoplay: eventCount > 1,
+      autoplayTimeout: 5000,
+      smartSpeed: 700,
+      center: eventCount < 3,
+      responsive: {
+        0: { items: 1 },
+        768: { items: Math.min(eventCount, 2) },
+        992: { items: Math.min(eventCount, 3) },
+      },
+    });
+  }
+});
+
+AOS.init({
+  duration: 800, // Animation duration in milliseconds
+  once: true, // Whether animation should happen only once - while scrolling down
 });

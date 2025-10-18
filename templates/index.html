@@ -145,89 +145,88 @@
   
 
     <!-- Services Section Begin -->
-    <section class="services">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 p-0">
-                   <div class="services__left set-bg" data-setbg="{{ eventmusics.cover_image.url }}">
-                   <audio controls>
-                      <source src="{{ eventmusics.audio_file.url }}" type="audio/mpeg">
-                                    Your browser does not support the audio tag.
+<section class="services">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+
+            <!-- LEFT SIDE: Image + Audio -->
+            <div class="col-lg-6 col-md-12 p-0">
+                <div class="services__left">
+                    <img src="{{ eventmusics.cover_image.url }}" alt="{{ eventmusics.title }}">
+                    <audio controls>
+                        <source src="{{ eventmusics.audio_file.url }}" type="audio/mpeg">
+                        Your browser does not support the audio tag.
                     </audio>
-                   
-                     </div>
                 </div>
-                <div class="col-lg-6 p-0">
-    <div class="row services__list">
-        {% for eventtype in eventtypes %}
-        <div class="col-lg-6 p-0 order-lg-{{ forloop.counter }} col-md-6 order-md-{{ forloop.counter }}">
-            <div class="service__item {% if forloop.counter|divisibleby:2 %}deep-bg{% endif %}">
-               
-                <i class="{{ eventtype.icon }}" style="font-size: 2.5rem;"></i>
-
-                <h4>{{ eventtype.title }}</h4>
-                <p>{{ eventtype.description }}</p>
             </div>
+
+            <!-- RIGHT SIDE: Dynamic Event Type Cards -->
+            <div class="col-lg-6 col-md-12 p-0">
+                <div class="services__list">
+                    <div class="row">
+                        {% for eventtype in eventtypes %}
+                        <div class="col-lg-6 col-md-6 mb-4">
+                            <div class="service__item {% if forloop.counter|divisibleby:2 %}deep-bg{% endif %}">
+                                <div class="service-icon">
+                                    <i class="{{ eventtype.icon }}"></i>
+                                </div>
+                                <h4>{{ eventtype.title }}</h4>
+                                <p>{{ eventtype.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
         </div>
-        {% endfor %}
     </div>
-</div>
+</section>
 
-            </div>
-        </div>
-    </section>
     <!-- Services Section End -->
 
     <!-- Track Section Begin -->
-    <section class="track spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7">
-                <div class="section-title">
-                    <h2>Latest tracks</h2>
-                    <h1>Music podcast</h1>
+<section class="track spad">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <!-- LEFT SIDE - Latest Tracks -->
+            <div class="col-lg-7 p-4 left-section">
+                <div class="section-title mb-4 text-center text-lg-start">
+                    <h1 class="highlight">BENGA MUSIC</h1>
+                    <h2 class="text-light">LATEST TRACKS</h2>
                 </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="track__all">
-                    <a href="https://odhithevillager.hustlesasa.shop/" class="primary-btn border-btn">View all tracks</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-7 p-0">
-                <div class="track__content nice-scroll">
 
+                <div class="track__content">
                     {% for track in latest_tracks %}
-                    <div class="single_player_container d-flex align-items-center justify-content-between">
-                        <div class="track-img">
-                            <img src="{{ track.cover_image.url }}" alt="{{ track.title }} - Cover" class="img-fluid" />
+                    <div class="track-card d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <img src="{{ track.cover_image.url }}" alt="{{ track.title }} - Cover"
+                                class="track-cover" />
+                            <div class="track-info ms-3">
+                                <h4>{{ track.title }}</h4>
+                                <p>{{ track.artist }}</p>
+                                <audio controls>
+                                    <source src="{{ track.audio_preview.url }}" type="audio/mpeg" />
+                                    Your browser does not support the audio tag.
+                                </audio>
+                            </div>
                         </div>
-                    
-                        <div class="track-info flex-grow-1 px-3">
-                            <h4>{{ track.title }}</h4>
-                            <p class="track-title">{{ track.artist }}</p>
-                            <audio controls>
-                                <source src="{{ track.audio_preview.url }}" type="audio/mpeg">
-                                Your browser does not support the audio tag.
-                            </audio>
-                        </div>
-                    
-                        <div class="track-buy">
-                            <a href="{{ track.buy_link }}" class="buy-btn" target="_blank">Buy Track</a>
-                        </div>
+                        <a href="{{ track.buy_link }}" target="_blank" class="buy-btn">Buy Track</a>
                     </div>
                     {% endfor %}
-                    </div>
-            </div>
-            <div class="col-lg-5 p-0">
-                <div class="track__pic">
-                    <img src="{% static 'img/quitar.jpg' %}" alt="">
                 </div>
+            </div>
+
+            <!-- RIGHT SIDE - Guitar Image Only -->
+            <div class="col-lg-5 p-0 d-flex align-items-center justify-content-center right-section">
+                <img src="{% static 'img/quitar.jpg' %}" alt="Guitar" class="guitar-img" />
             </div>
         </div>
     </div>
 </section>
+
+
+
     <!-- Track Section End -->
 
     <!-- Albums Section Begin -->
@@ -297,42 +296,51 @@
 
         <div class="row">
             {% for video in videos %}
+
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="video-card">
-                    <div class="embed-responsive embed-responsive-16by9">
+                <div class="blog-card">
+                    <div class="blog-card-image">
                         <iframe class="embed-responsive-item" width="100%" height="200"
-                            src="https://www.youtube.com/embed/{{ video.video_id }}" frameborder="0"
-                            allowfullscreen></iframe>
+                            src="https://www.youtube.com/embed/{{ video.video_id }}" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="video-caption text-center mt-2">
-                        <span>{{ video.artist|title }} - {{ video.year }}</span><br>
-                        <h5>{{ video.title }}</h5>
+            
+                    <div class="blog-card-content">
+                        <span class="category">{{ video.year }}</span>
+                        <h4>{{ video.title }}</h4>
                         <p>{{ video.caption }}</p>
+            
+                        <div class="author-info">
+                            
+                            <div>
+                                <h6>{{ video.artist|title }}</h6>
+                                <small>{{ video.date_posted|date:"M j, Y" }}</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
             {% endfor %}
         </div>
     </div>
 </section>
 
-
-
-
     <!-- Countdown Section Begin -->
-    <section class="countdown spad set-bg">
+<section class="countdown spad set-bg">
+    <div class="countdown-box">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="countdown__text">
                         <h1>{{ video.title }}</h1>
                         {% if not released %}
-                        <h4>Music video drops in</h4>
+                        <h4>Drops in</h4>
                         {% else %}
                         <h4>Now available!</h4>
                         {% endif %}
                     </div>
-    
+
                     {% if not released %}
                     <div class="countdown__timer" id="countdown-time"
                         data-deadline="{{ video.release_datetime|date:'Y-m-d H:i:s' }}">
@@ -350,7 +358,7 @@
                         </div>
                     </div>
                     {% endif %}
-    
+
                     <div class="buy__tickets">
                         {% if released %}
                         <a href="{% if video.youtube_link %}{{ video.youtube_link }}{% else %}{{ video.video_file.url }}{% endif %}"
@@ -362,7 +370,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Countdown Section End -->
 {% endblock %}
