@@ -1,12 +1,44 @@
 {% extends "assests/main.html" %}
 {% load static %}
 
-{% block title %}Odhi The Villager | videos{% endblock %}
-{% block meta_description %}Official website of Odhi the Villager — a Benga music artist from Kenya. Discover his sound, story, and journey to
-global recognition{% endblock %}
-{% block meta_keywords %}Benga Music, Kenyan Artist, Odhi the Villager, Kenyan Benga, Afrobeat, World Music, Traditional Kenyan Music{% endblock %}
-
+{% block title %}Odhi The Villager | {{ hero.title|default:"Videos" }}{% endblock %}
+{% block meta_description %}
+{{ hero.description|default:"Odhithe Villager — Kenya’s finest Benga artist sharing his soulful Luo music videos." }}
+{% endblock %}
+{% block meta_keywords %}
+Odhithe Villager, Benga music, Kenyan artist, {{ hero.title|default:"Benga videos" }}, Luo music, Kenya music videos
+{% endblock %}
 {% block content %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicVideoObject",
+  "name": "{{ hero.title|escapejs }}",
+  "description": "{{ hero.description|truncatechars:150|escapejs }}",
+  "url": "https://www.odhithevillager.com{{ request.path }}",
+  "thumbnailUrl": "{% static 'img/youtube/villageexperience.png' %}",
+  "uploadDate": "{{ hero.release_date|date:'Y-m-d' }}",
+  "duration": "PT3M45S",
+  "genre": "Benga",
+  "inLanguage": "en",
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Odhithe Villager",
+    "genre": "Benga",
+    "url": "https://www.odhithevillager.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Odhithe Villager Music",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.odhithevillager.com/static/img/logo.png"
+    }
+  }
+}
+</script>
+{% endblock %}
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
     <div class="container">
@@ -42,7 +74,7 @@ global recognition{% endblock %}
                             </a>
                     
                             <div class="videos__large__item__text mt-4">
-                                <h4>Odhi the Villager - My Love</h4>
+                                <h4>{{ hero.title }}</h4>
                                 <p>{{ hero.description }}</p>
                             </div>
                         </div>

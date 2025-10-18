@@ -8,6 +8,51 @@
 soulful music. Learn about his journey, style, and passion.{% endblock %}
 {% block meta_keywords %}Odhi the Villager, Benga music, Kenyan musician, traditional music Kenya, Kenyan Benga artist, African music, music
 storytelling, Luo culture{% endblock %}
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ blog.title|escapejs }}",
+  "description": "{{ blog.content|striptags|truncatewords:50|escapejs }}",
+  "image": "{{ image_url }}",
+  "datePublished": "{{ blog.created_at|date:'Y-m-d' }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ blog.author|default:'Odhi The Villager'|escapejs }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Odhi The Villager",
+    "url": "https://www.odhithevillager.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page_url }}"
+  }
+}
+</script>
+{% endblock %}
+
+{% block extra_meta %}
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ blog.title }}">
+<meta property="og:description" content="{{ blog.content|striptags|truncatewords:50 }}">
+<meta property="og:image" content="{{ image_url }}">
+<meta property="og:url" content="{{ page_url }}">
+<meta property="og:site_name" content="Odhi The Villager">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ blog.title }}">
+<meta name="twitter:description" content="{{ blog.content|striptags|truncatewords:50 }}">
+<meta name="twitter:image" content="{{ image_url }}">
+<meta name="twitter:site" content="@odhithevillager">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ page_url }}">
+{% endblock %}
 
 
 {% block content %}

@@ -5,6 +5,61 @@
 {% block meta_description %}Welcome to the official site of Odhi The Villager, Kenyan Benga music artist.{% endblock %}
 {% block meta_keywords %}Odhi The Villager, Benga, Kenyan Music, Home{% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Odhi The Villager Music Blog",
+  "url": "https://www.odhithevillager.com/",
+  "description": "Explore the latest updates, insights, and cultural stories from Odhi The Villager, Kenya’s Benga music artist.",
+  "publisher": {
+    "@type": "Person",
+    "name": "Odhi The Villager",
+    "url": "https://www.odhithevillager.com/about/",
+    "image": "https://www.odhithevillager.com/static/img/odhi.jpg"
+  },
+  "inLanguage": "en",
+  "blogPost": [
+    {% for blog in recent_blogs %}
+    {
+      "@type": "BlogPosting",
+      "headline": "{{ blog.title|escapejs }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ blog.author|default:'Odhi The Villager'|escapejs }}"
+      },
+      "datePublished": "{{ blog.created_at|date:'Y-m-d' }}",
+      "image": "{{ image_url }}",
+      "url": "{{ request.build_absolute_uri|slice:':-1' }}{% url 'blogdetail' blog_id=blog.id %}",
+      "publisher": {
+        "@type": "Person",
+        "name": "Odhi The Villager"
+      },
+      "articleSection": "{{ blog.category|escapejs }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block extra_meta %}
+<!-- Open Graph & Twitter Cards -->
+<meta property="og:title" content="Odhi The Villager | Kenyan Benga Music Blog">
+<meta property="og:description"
+    content="Follow Odhi The Villager’s official music blog for the latest Benga news, stories, and cultural reflections.">
+<meta property="og:image" content="https://www.odhithevillager.com/static/img/odhi.jpg">
+<meta property="og:url" content="https://www.odhithevillager.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Odhi The Villager | Kenyan Benga Music Blog">
+<meta name="twitter:description"
+    content="Discover the latest stories, performances, and updates from Odhi The Villager.">
+<meta name="twitter:image" content="https://www.odhithevillager.com/static/img/odhi.jpg">
+{% endblock %}
+
+
 
 {% block content %}
 <!-- Breadcrumb Begin -->
