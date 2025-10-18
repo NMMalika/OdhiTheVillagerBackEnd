@@ -49,15 +49,11 @@ def about(request):
 def contact(request):
     faqs = FAQ.objects.all()
     
-    # --- TEMPORARY DEBUG CODE ---
-    print(f"Number of FAQs retrieved: {faqs.count()}")
-    # --- END DEBUG CODE ---
-
-    test_message = "Your contact view is working correctly! 🎉"
+    
 
     context = {
         'faqs': faqs,
-        'test_message': test_message,
+        
     }
     return render(request, "contact.html", context)
 

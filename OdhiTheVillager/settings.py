@@ -23,19 +23,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-g!8x(=e%bk6s-9%d8y5+fz!0cq7o2y9v%^bgsij%e(@*2w3jpw"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+# Set secure settings for production
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+# Trust HTTPS through proxy (important if using Railway, Render, or Nginx)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Additional HTTP security headers
+SECURE_HSTS_SECONDS = 31536000  # Force HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
-RAILWAY_APP_HOSTNAME = os.getenv('RAILWAY_DOMAIN')
 
 # Add the hostname to your allowed hosts
 ALLOWED_HOSTS = [
-    RAILWAY_APP_HOSTNAME,
-    'localhost',
-    '127.0.0.1',
+    'odhithevillager.com', 'www.odhithevillager.com'
 ]
 
 
@@ -49,6 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     "odhi",
     'simple_history',
     'tinymce',

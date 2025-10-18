@@ -16,9 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
 from  odhi import views
+from odhi.sitemaps import BlogSitemap, StaticViewSitemap
 from django.conf import settings
 from django.conf.urls.static import static
+
+
+sitemaps = {
+    'blogs': BlogSitemap,
+    'static': StaticViewSitemap,
+}
+
 
 admin.site.site_header = "Odhi The Villager Admin"
 admin.site.site_title = "Odhi Admin Portal"
@@ -34,8 +43,9 @@ urlpatterns = [
     path("video/",views.video,name="video"),
     path('generalinfo/<int:pk>/history/', views.generalinfo_history, name='generalinfo_history'),
     path('generalinfo/<int:pk>/revert/<int:history_id>/', views.revert_generalinfo, name='revert_generalinfo'),
-    path('tinymce/', include('tinymce.urls'))
- 
+    path('tinymce/', include('tinymce.urls')),
+    
+    path("sitemap.xml", sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
